@@ -1,10 +1,12 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Hello } from "./Hello";
+import ProfileListComponent from "./components/ProfileListComponent";
+
+import Profile from "./models/Profile"
 
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
-    document.getElementById("example")
+    <ProfileListComponent profiles={[{url:"vk.com/darkmentat"}, {url:"vk.com/id0"}]} />,
+    document.getElementById("reactRoot")
 );
