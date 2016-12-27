@@ -9,6 +9,6 @@ export interface ProfleProps {
 
 export default class ProfileComponent extends React.Component<ProfleProps, undefined> {
     render() {
-        return <div>{this.props.profile.url}</div>;
+        return <p>{this.props.profile.url}</p>;
     }
 }

@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import {Jumbotron} from "react-bootstrap";
+
 import ProfileComponent from "./ProfileComponent"
 
 import Profile from "../models/Profile"
@@ -17,6 +19,6 @@ export default class ProfileListComponent extends React.Component<ProfileListPro
           (prof, index) => <ProfileComponent key={index} profile={prof}/>
         )
 
-        return <div>{ content }</div>
+        return <Jumbotron>{ content }</Jumbotron>
     }
 }
