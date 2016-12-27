@@ -5,20 +5,24 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "watch": "webpack && webpack-dev-server --progress --colors --watch"
+    "start": "http-server",
+    "dev": "concurrently --kill-others --prefix [{name}] --names WEBPACK,HTTP \"webpack -wd --colors\" \"http-server ./static/\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/react": "^0.14.55",
-    "@types/react-dom": "^0.14.19",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "@types/react": "^0.14.55",
+    "@types/react-dom": "^0.14.19"
   },
   "devDependencies": {
-    "awesome-typescript-loader": "^3.0.0-beta.17",
+    "concurrently": "^3.1.0",
+    "http-server": "^0.9.0",
+    "mkdirp": "^0.5.1",
     "source-map-loader": "^0.1.5",
+    "ts-loader": "^1.3.3",
     "typescript": "^2.1.4",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2"
