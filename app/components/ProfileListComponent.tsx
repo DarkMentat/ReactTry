@@ -19,6 +19,6 @@ export default class ProfileListComponent extends React.Component<ProfileListPro
           (prof, index) => <ProfileComponent key={index} profile={prof}/>
         )
 
-        return <Jumbotron>{ content }</Jumbotron>
+        return <div><Jumbotron className="profile-list">{ content }</Jumbotron></div>
     }
 }

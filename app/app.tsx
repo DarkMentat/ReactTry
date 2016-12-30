@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import ProfileListComponent from "./components/ProfileListComponent";
+import AppComponent from "./components/AppComponent";
 
 ReactDOM.render(
-    <ProfileListComponent profiles={[{url:"vk.com/id1"}, {url:"vk.com/id2"}]} />,
+    <AppComponent />,
     document.getElementById("reactRoot")
 );
