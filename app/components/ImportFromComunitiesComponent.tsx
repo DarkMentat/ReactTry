@@ -34,6 +34,13 @@ export default class ImportFromComunitiesComponent extends React.Component<Impor
 
     render() {
 
+        let form = (
+          <form onSubmit={(e) => this.onAddComunity(e) } >
+              <input type="text" value={this.state.text} onChange={ e => this.onTextChange(e) }/>
+              <button onClick={(e) => this.onAddComunity(e) } >+</button>
+          </form>
+        )
+
         let comunityNames = this.state.comunities.map( name =>
 
             <div>{name}</div>
@@ -41,10 +48,7 @@ export default class ImportFromComunitiesComponent extends React.Component<Impor
 
         return (
           <div className="import-from-comunities">
-            <form onSubmit={(e) => this.onAddComunity(e) } >
-                <input type="text" value={this.state.text} onChange={ e => this.onTextChange(e) }/>
-                <button onClick={(e) => this.onAddComunity(e) } />
-            </form>
+            {form}
             {comunityNames}
           </div>
         )

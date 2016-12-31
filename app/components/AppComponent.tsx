@@ -12,11 +12,9 @@ export default class AppComponent extends React.Component<AppProps, undefined> {
     render() {
         return (
             <div>
-
                 <ImportFromComunitiesComponent />
                 <BaseCriteriasComponent />
                 <ProfileListComponent profiles={[{url:"vk.com/id1"}, {url:"vk.com/id2"}]} />
-
             </div>
         );
     }
