@@ -28,22 +28,27 @@ export default class ImportFromComunitiesComponent extends React.Component<Impor
     }
     onAddComunity(e: any) {
       e.preventDefault();
-      this.setState({ ...this.state, text: "", comunities: [...this.state.comunities, this.state.text]})
 
+      if(!this.state.comunities.some(x => x == this.state.text)) {
+
+        this.setState({ ...this.state, text: "", comunities: [...this.state.comunities, this.state.text]})
+      } else {
+        this.setState({ ...this.state, text: ""});
+      }
     }
 
     render() {
 
         let form = (
           <form onSubmit={(e) => this.onAddComunity(e) } >
-              <input type="text" value={this.state.text} onChange={ e => this.onTextChange(e) }/>
+              <input type="text" placeholder="Comunity name" value={this.state.text} onChange={ e => this.onTextChange(e) }/>
               <button onClick={(e) => this.onAddComunity(e) } >+</button>
           </form>
         )
 
         let comunityNames = this.state.comunities.map( name =>
 
-            <div>{name}</div>
+            <div key={name}>{name}</div>
         )
 
         return (

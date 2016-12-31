@@ -8,17 +8,17 @@ export interface BaseCriteriasProps {
 export default class BaseCriteriasComponent extends React.Component<BaseCriteriasProps, undefined> {
     render() {
         return (
-            <div>
+            <div className="base-criterias">
                 <form>
                     <div>Location:</div>
                     <div>
-                        <p><input type="text" value="Country"/></p>
-                        <p><input type="text" value="City"/></p>
+                        <p><input type="text" placeholder="Country"/></p>
+                        <p><input type="text" placeholder="City"/></p>
                     </div>
                     <div>Age:</div>
                     <div>
-                        <input type="text" value="From"/>
-                        <input type="text" value="To"/>
+                        <input type="text" placeholder="From"/>
+                        <input type="text" placeholder="To"/>
                     </div>
                 </form>
             </div>
