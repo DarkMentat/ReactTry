@@ -1,15 +1,18 @@
 import * as React from "react";
 
+import Comunity from "../models/Comunity"
+
 
 export interface ImportFromComunitiesProps {
 
     text?: string;
+    comunities: Comunity[];
+    onAddComunity: (name:string) => void;
 }
 
 export interface ImportFromComunitiesState {
 
     text: string;
-    comunities: string[];
 }
 
 export default class ImportFromComunitiesComponent extends React.Component<ImportFromComunitiesProps, ImportFromComunitiesState> {
@@ -18,8 +21,7 @@ export default class ImportFromComunitiesComponent extends React.Component<Impor
       super(props);
 
       this.state = {
-        text: this.props.text || '',
-        comunities: []
+        text: this.props.text || ''
       };
     }
 
@@ -29,12 +31,8 @@ export default class ImportFromComunitiesComponent extends React.Component<Impor
     onAddComunity(e: any) {
       e.preventDefault();
 
-      if(!this.state.comunities.some(x => x == this.state.text)) {
-
-        this.setState({ ...this.state, text: "", comunities: [...this.state.comunities, this.state.text]})
-      } else {
-        this.setState({ ...this.state, text: ""});
-      }
+      this.props.onAddComunity(this.state.text);
+      this.setState({ ...this.state, text: ""});
     }
 
     render() {
@@ -46,9 +44,8 @@ export default class ImportFromComunitiesComponent extends React.Component<Impor
           </form>
         )
 
-        let comunityNames = this.state.comunities.map( name =>
-
-            <div key={name}>{name}</div>
+        let comunityNames = this.props.comunities.map(comunity =>
+            <div key={comunity.url}>{comunity.url}</div>
         )
 
         return (
