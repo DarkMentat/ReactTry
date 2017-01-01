@@ -1,4 +1,4 @@
-export default class Comunity {
+export default class Community {
 
     name?: string;
     url: string;

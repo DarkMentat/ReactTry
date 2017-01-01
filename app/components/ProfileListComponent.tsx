@@ -1,10 +1,7 @@
 import * as React from "react";
-
 import {Jumbotron} from "react-bootstrap";
-
-import ProfileComponent from "./ProfileComponent"
-
-import Profile from "../models/Profile"
+import ProfileComponent from "./ProfileComponent";
+import Profile from "../models/Profile";
 
 
 export interface ProfileListProps {
@@ -17,7 +14,7 @@ export default class ProfileListComponent extends React.Component<ProfileListPro
 
         let content = this.props.profiles.map(
           (prof, index) => <ProfileComponent key={index} profile={prof}/>
-        )
+        );
 
         return <div><Jumbotron className="profile-list">{ content }</Jumbotron></div>
     }

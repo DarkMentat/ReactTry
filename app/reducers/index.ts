@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux'
-import comunities from './comunitiesReducer'
-import profiles from './profilesReducer'
+import {combineReducers} from "redux";
+import communities from "./communitiesReducer";
+import profiles from "./profilesReducer";
 
 export default combineReducers({
-    comunities,
+    communities,
     profiles
 })

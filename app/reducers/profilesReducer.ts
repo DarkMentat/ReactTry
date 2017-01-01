@@ -1,14 +1,17 @@
-import { Action } from '../actions/action'
+import {Action} from "../actions/action";
+import Profile from "../models/Profile";
 
-import Profile from "../models/Profile"
 
-
-const initState = {
-
-    list: []
+interface CommunitiesState {
+    list: Profile[]
 }
 
-export default function comunitiesReducer(state = initState, action: Action): any {
+const initState: CommunitiesState = {
+
+    list: []
+};
+
+export default function profilesReducer(state = initState, action: Action): any {
 
     return state;
 }
