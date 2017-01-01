@@ -12,8 +12,8 @@ export interface ProfileListProps {
 export default class ProfileListComponent extends React.Component<ProfileListProps, undefined> {
     render() {
 
-        let content = this.props.profiles.map(
-          (prof, index) => <ProfileComponent key={index} profile={prof}/>
+        let content = this.props.profiles.map(prof =>
+            <ProfileComponent key={prof.url} profile={prof}/>
         );
 
         return <div><Jumbotron className="profile-list">{ content }</Jumbotron></div>

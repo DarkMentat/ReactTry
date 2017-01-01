@@ -6,9 +6,10 @@ import BaseCriteriasComponent from "./BaseCriteriasComponent";
 import ImportFromCommunitiesComponent from "./ImportFromCommunitiesComponent";
 import Community from "../models/Community";
 import Profile from "../models/Profile";
+import {AppState} from "../state/state";
 
 
-export interface AppProps {
+interface AppProps {
     profiles: Profile[],
     communities: Community[],
     onAddCommunity: (url: string) => void
@@ -19,25 +20,26 @@ class AppComponent extends React.Component<AppProps, undefined> {
     render() {
         return (
             <div>
-                <ImportFromCommunitiesComponent communities={this.props.communities} onAddCommunity={(s) => this.props.onAddCommunity(s)} />
+                <ImportFromCommunitiesComponent communities={this.props.communities}
+                                                onAddCommunity={(s) => this.props.onAddCommunity(s)}/>
                 <BaseCriteriasComponent />
-                <ProfileListComponent profiles={this.props.profiles} />
+                <ProfileListComponent profiles={this.props.profiles}/>
             </div>
         );
     }
 }
 
-function mapStateToProps (state: any) {
+function mapStateToProps(state: AppState) {
 
     return {
-      communities: state.communities.list,
-      profiles: state.profiles.list
+        communities: state.communities.list,
+        profiles: state.profiles.list
     };
 }
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: Function) {
 
     return {
-      onAddCommunity: (name: string) => dispatch(addCommunity(name))
+        onAddCommunity: (name: string) => dispatch(addCommunity(name))
     };
 }
 

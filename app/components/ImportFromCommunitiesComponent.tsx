@@ -1,5 +1,6 @@
 import * as React from "react";
 import Community from "../models/Community";
+import FormEvent = React.FormEvent;
 
 
 export interface ImportFromCommunitiesProps {
@@ -24,10 +25,10 @@ export default class ImportFromCommunitiesComponent extends React.Component<Impo
       };
     }
 
-    onTextChange(e: any) {
-      this.setState({ ...this.state, text: e.target.value });
+    onTextChange(e: FormEvent<HTMLInputElement>) {
+      this.setState({ ...this.state, text: e.currentTarget.value });
     }
-    onAddCommunity(e: any) {
+    onAddCommunity(e: FormEvent<HTMLButtonElement|HTMLFormElement>) {
       e.preventDefault();
 
       this.props.onAddCommunity(this.state.text);

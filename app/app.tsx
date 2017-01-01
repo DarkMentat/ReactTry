@@ -10,7 +10,7 @@ let store = createStore(vkSeeker);
 
 ReactDOM.render(
     <Provider store={store}>
-      <AppComponent />
+        <AppComponent />
     </Provider>,
     document.getElementById("reactRoot")
 );

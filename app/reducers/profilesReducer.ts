@@ -1,12 +1,8 @@
 import {Action} from "../actions/action";
-import Profile from "../models/Profile";
+import {ProfilesState} from "../state/state";
 
 
-interface CommunitiesState {
-    list: Profile[]
-}
-
-const initState: CommunitiesState = {
+const initState: ProfilesState = {
 
     list: []
 };

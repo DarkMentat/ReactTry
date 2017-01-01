@@ -1,11 +1,8 @@
 import {Action} from "../actions/action";
 import {isAddCommunityAction} from "../actions/comunitiesActions";
 import Community from "../models/Community";
+import {CommunitiesState} from "../state/state";
 
-
-interface CommunitiesState {
-    list: Community[]
-}
 
 const initState: CommunitiesState = {
 
