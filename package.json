@@ -4,13 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "http-server",
-    "dev": "concurrently --kill-others --prefix [{name}] --names WEBPACK,HTTP \"webpack -wd --colors\" \"http-server ./static/\""
+    "start": "node devServer.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@types/react": "^0.14.55",
     "@types/react-bootstrap": "0.0.37",
@@ -24,13 +19,11 @@
     "redux": "^3.6.0"
   },
   "devDependencies": {
-    "awesome-typescript-loader": "^3.0.0-beta.17",
-    "concurrently": "^3.1.0",
-    "http-server": "^0.9.0",
-    "mkdirp": "^0.5.1",
+    "react-hot-loader": "^3.0.0-beta.4",
     "source-map-loader": "^0.1.5",
+    "ts-loader": "^0.8.2",
     "typescript": "^2.1.4",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
   }
 }

@@ -39,7 +39,7 @@ export default class ImportFromCommunitiesComponent extends React.Component<Impo
 
         let form = (
           <form onSubmit={(e) => this.onAddCommunity(e) } >
-              <input type="text" placeholder="Community name" value={this.state.text} onChange={ e => this.onTextChange(e) }/>
+              <input type="text" placeholder="Community" value={this.state.text} onChange={ e => this.onTextChange(e) }/>
               <button onClick={(e) => this.onAddCommunity(e) } >+</button>
           </form>
         );
