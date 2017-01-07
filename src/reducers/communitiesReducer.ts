@@ -9,7 +9,7 @@ const initState: CommunitiesState = {
     list: []
 };
 
-export default function communitiesReducer(state: CommunitiesState = initState, action: Action): any {
+export default function communitiesReducer(state: CommunitiesState = initState, action: Action): CommunitiesState {
 
     if (isAddCommunityAction(action)) {
         if(!state.list.some(x => x.url == action.communityUrl)) {

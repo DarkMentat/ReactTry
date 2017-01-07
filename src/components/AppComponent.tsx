@@ -7,11 +7,16 @@ import ImportFromCommunitiesComponent from "./ImportFromCommunitiesComponent";
 import Community from "../models/Community";
 import Profile from "../models/Profile";
 import {AppState} from "../state/state";
+import LoginComponent from "./LoginComponent";
+import {login} from "../actions/authActions";
+import AuthUser from "../models/AuthUser";
 
 
 interface AppProps {
     profiles: Profile[],
     communities: Community[],
+    authUser: AuthUser
+    onLogin: () => void,
     onAddCommunity: (url: string) => void
 }
 
@@ -20,6 +25,7 @@ class AppComponent extends React.Component<AppProps, undefined> {
     render() {
         return (
             <div>
+                <LoginComponent onLogin={() => this.props.onLogin()} authUser={this.props.authUser} />
                 <ImportFromCommunitiesComponent communities={this.props.communities}
                                                 onAddCommunity={(s) => this.props.onAddCommunity(s)}/>
                 <BaseCriteriasComponent />
@@ -33,13 +39,15 @@ function mapStateToProps(state: AppState) {
 
     return {
         communities: state.communities.list,
-        profiles: state.profiles.list
+        profiles: state.profiles.list,
+        authUser: state.auth.user
     };
 }
 function mapDispatchToProps(dispatch: Function) {
 
     return {
-        onAddCommunity: (name: string) => dispatch(addCommunity(name))
+        onAddCommunity: (name: string) => dispatch(addCommunity(name)),
+        onLogin: () => dispatch(login())
     };
 }
 

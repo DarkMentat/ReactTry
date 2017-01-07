@@ -2,5 +2,5 @@
 temp
 build
 node_modules
-bundle.js
-bundle.js.map
+public/js/bundle.js
+public/js/bundle.js.map

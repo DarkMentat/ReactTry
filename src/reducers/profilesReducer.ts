@@ -7,7 +7,7 @@ const initState: ProfilesState = {
     list: []
 };
 
-export default function profilesReducer(state = initState, action: Action): any {
+export default function profilesReducer(state = initState, action: Action): ProfilesState {
 
     return state;
 }

@@ -1,20 +1,21 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {Provider} from "react-redux";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
 import vkSeeker from "./reducers";
 import AppComponent from "./components/AppComponent";
+import thunk from "redux-thunk";
 
 
-declare var module: any;
-declare var require: any;
+declare let module: any;
+declare let require: any;
 
 if (module.hot) {
     module.hot.accept();
 }
 
 function configureStore() {
-  const store = createStore(vkSeeker);
+  const store = createStore(vkSeeker, applyMiddleware(thunk));
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
