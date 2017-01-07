@@ -8,7 +8,7 @@ import Community from "../models/Community";
 import Profile from "../models/Profile";
 import {AppState} from "../state/state";
 import LoginComponent from "./LoginComponent";
-import {login} from "../actions/authActions";
+import {login, logout} from "../actions/authActions";
 import AuthUser from "../models/AuthUser";
 
 
@@ -17,6 +17,7 @@ interface AppProps {
     communities: Community[],
     authUser: AuthUser
     onLogin: () => void,
+    onLogout: () => void,
     onAddCommunity: (url: string) => void
 }
 
@@ -25,7 +26,9 @@ class AppComponent extends React.Component<AppProps, undefined> {
     render() {
         return (
             <div>
-                <LoginComponent onLogin={() => this.props.onLogin()} authUser={this.props.authUser} />
+                <LoginComponent onLogin={() => this.props.onLogin()}
+                                onLogout={() => this.props.onLogout()}
+                                authUser={this.props.authUser}/>
                 <ImportFromCommunitiesComponent communities={this.props.communities}
                                                 onAddCommunity={(s) => this.props.onAddCommunity(s)}/>
                 <BaseCriteriasComponent />
@@ -47,7 +50,8 @@ function mapDispatchToProps(dispatch: Function) {
 
     return {
         onAddCommunity: (name: string) => dispatch(addCommunity(name)),
-        onLogin: () => dispatch(login())
+        onLogin: () => dispatch(login()),
+        onLogout: () => dispatch(logout())
     };
 }
 

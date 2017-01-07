@@ -1,12 +1,15 @@
 import {Action} from "./action";
 import AuthUser from "../models/AuthUser";
 import AuthSession from "../models/AuthSession";
+declare let VK: any;
 
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGOUT = 'LOGOUT';
 
 
+export interface LogoutAction extends Action {}
 export interface LoginFailAction extends Action {}
 export interface LoginSuccessAction extends Action {
 
@@ -14,9 +17,13 @@ export interface LoginSuccessAction extends Action {
     session: AuthSession
 }
 
+export function logout() {
 
-declare let VK: any;
+    return (dispatch: Function) => {
 
+        VK.Auth.logout(() => dispatch(<LogoutAction>{type: LOGOUT}))
+    };
+}
 export function login() {
 
     return (dispatch: Function) => {
@@ -34,7 +41,8 @@ export function login() {
                                         response.session.user.first_name,
                                         response.session.user.last_name),
 
-                    session: new AuthSession(response.session.mid,
+                    session: new AuthSession(response.session.expire,
+                                             response.session.mid,
                                              response.session.secret,
                                              response.session.sid,
                                              response.session.sig)
@@ -47,6 +55,9 @@ export function login() {
     };
 }
 
+export function isLogoutAction(action: Action): action is LogoutAction {
+    return action.type == LOGOUT;
+}
 export function isLoginSuccessAction(action: Action): action is LoginSuccessAction {
   return action.type == LOGIN_SUCCESS;
 }

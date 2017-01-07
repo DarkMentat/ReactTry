@@ -4,8 +4,7 @@ import {Provider} from "react-redux";
 import {createStore, applyMiddleware} from "redux";
 import vkSeeker from "./reducers";
 import AppComponent from "./components/AppComponent";
-import thunk from "redux-thunk";
-
+const thunk: any = require('redux-thunk').default;
 
 declare let module: any;
 declare let require: any;

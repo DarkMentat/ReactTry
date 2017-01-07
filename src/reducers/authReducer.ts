@@ -1,5 +1,5 @@
 import {Action} from "../actions/action";
-import {isLoginFailAction, isLoginSuccessAction} from "../actions/authActions";
+import {isLoginFailAction, isLoginSuccessAction, isLogoutAction} from "../actions/authActions";
 import {AuthState} from "../state/state";
 
 
@@ -19,6 +19,10 @@ export default function authReducer(state: AuthState = initState, action: Action
         return {...state, isLoggedIn: false, user: null, session: null }
     }
 
+    if(isLogoutAction(action)) {
+
+        return {...state, isLoggedIn: false, user: null, session: null }
+    }
 
     return state;
 }
