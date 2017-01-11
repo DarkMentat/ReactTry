@@ -4,29 +4,59 @@ import AuthSession from "../models/AuthSession";
 declare let VK: any;
 
 
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAIL = 'LOGIN_FAIL';
-export const LOGOUT = 'LOGOUT';
+export class LogoutAction extends Action {
 
-
-export interface LogoutAction extends Action {}
-export interface LoginFailAction extends Action {}
-export interface LoginSuccessAction extends Action {
-
-    user: AuthUser,
-    session: AuthSession
+    static typeOf(action: Action): action is LogoutAction{
+        return action.type == "LogoutAction"
+    }
 }
+
+
+export class LoginStartAction extends Action {
+
+    static typeOf(action: Action): action is LoginStartAction{
+        return action.type == "LoginStartAction"
+    }
+}
+
+export class LoginFailAction extends Action {
+
+    static typeOf(action: Action): action is LoginFailAction{
+        return action.type == "LoginFailAction"
+    }
+}
+
+export class LoginSuccessAction extends Action {
+
+    static typeOf(action: Action): action is LoginSuccessAction{
+        return action.type == "LoginSuccessAction"
+    }
+
+    user: AuthUser;
+    session: AuthSession;
+
+
+    constructor(user: AuthUser, session: AuthSession) {
+        super();
+
+        this.user = user;
+        this.session = session;
+    }
+}
+
 
 export function logout() {
 
     return (dispatch: Function) => {
 
-        VK.Auth.logout(() => dispatch(<LogoutAction>{type: LOGOUT}))
+        VK.Auth.logout(() => dispatch(new LogoutAction().plain()))
     };
 }
 export function login() {
 
     return (dispatch: Function) => {
+
+        dispatch(new LoginStartAction().plain());
 
         VK.Auth.login((response: any) => {
 
@@ -37,35 +67,24 @@ export function login() {
 
                 document.createElement("img").src = "https://oauth.vk.com/authorize?client_id="+clientId+"&display=page&redirect_uri="+redirectUrl+"&response_type=code&v=5.60";
 
-                dispatch(<LoginSuccessAction>{
+                dispatch(new LoginSuccessAction(
 
-                    type: LOGIN_SUCCESS,
+                    new AuthUser(response.session.user.id,
+                                 response.session.user.domain,
+                                 response.session.user.first_name,
+                                 response.session.user.last_name),
 
-                    user: new AuthUser(response.session.user.id,
-                                        response.session.user.domain,
-                                        response.session.user.first_name,
-                                        response.session.user.last_name),
+                    new AuthSession(response.session.expire,
+                                    response.session.mid,
+                                    response.session.secret,
+                                    response.session.sid,
+                                    response.session.sig)
 
-                    session: new AuthSession(response.session.expire,
-                                             response.session.mid,
-                                             response.session.secret,
-                                             response.session.sid,
-                                             response.session.sig)
-                });
+                ).plain());
 
             } else {
-                dispatch(<LoginFailAction>{type: LOGIN_FAIL});
+                dispatch(new LoginFailAction().plain());
             }
         })
     };
-}
-
-export function isLogoutAction(action: Action): action is LogoutAction {
-    return action.type == LOGOUT;
-}
-export function isLoginSuccessAction(action: Action): action is LoginSuccessAction {
-  return action.type == LOGIN_SUCCESS;
-}
-export function isLoginFailAction(action: Action): action is LoginFailAction {
-    return action.type == LOGIN_FAIL;
 }

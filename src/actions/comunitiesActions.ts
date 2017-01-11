@@ -1,19 +1,20 @@
 import {Action} from "./action";
 
 
-export const ADD_COMMUNITY = 'ADD_COMMUNITY';
+export class AddCommunityAction extends Action {
 
-export interface AddCommunityAction extends Action {
+    static typeOf(action: Action): action is AddCommunityAction{
+        return action.type == "AddCommunityAction"
+    }
+
     communityUrl: string;
-}
 
-export function addCommunity(url: string) {
-    return {
-        type: ADD_COMMUNITY,
-        communityUrl: url
+    constructor(communityUrl: string) {
+        super();
+        this.communityUrl = communityUrl;
     }
 }
 
-export function isAddCommunityAction(action: Action): action is AddCommunityAction {
-  return action.type == ADD_COMMUNITY;
+export function addCommunity(url: string) {
+    return new AddCommunityAction(url).plain()
 }

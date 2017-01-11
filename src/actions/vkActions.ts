@@ -2,22 +2,41 @@ import {Action} from "./action";
 import AuthSession from "../models/AuthSession";
 
 
-export const SEARCHING_COMMUNITY = 'SEARCHING_COMMUNITY';
-export const SEARCH_COMMUNITY_SUCCESS = 'SEARCH_COMMUNITY_SUCCESS';
-export const SEARCH_COMMUNITY_FAIL = 'SEARCH_COMMUNITY_FAIL';
+export class SearchInCommunityStartAction extends Action {
 
-
-export interface SearchInCommunityFailAction extends Action {}
-export interface SearchInCommunitySuccessAction extends Action {
-    result: string
+    static typeOf(action: Action): action is SearchInCommunityStartAction{
+        return action.type == "SearchInCommunityStartAction"
+    }
 }
-export interface SearchingInCommunityAction extends Action {}
+
+export class SearchInCommunityFailAction extends Action {
+
+    static typeOf(action: Action): action is SearchInCommunityFailAction{
+        return action.type == "SearchInCommunityFailAction"
+    }
+}
+
+export class SearchInCommunitySuccessAction extends Action {
+
+    static typeOf(action: Action): action is SearchInCommunitySuccessAction{
+        return action.type == "SearchInCommunitySuccessAction"
+    }
+
+    result: string;
+
+    constructor(result: string) {
+        super();
+
+        this.result = result;
+    }
+}
+
 
 export function searchCommunity(url: string, session: AuthSession) {
 
     return (dispatch: Function) => {
 
-        dispatch(<SearchingInCommunityAction>{type: SEARCHING_COMMUNITY});
+        dispatch(new SearchInCommunityStartAction().plain());
 
         let request = new XMLHttpRequest();
         request.open("GET", "http://vk-seeker-base-vk-seeker.44fs.preview.openshiftapps.com/vk/search?communityId="+url, true);
@@ -29,28 +48,13 @@ export function searchCommunity(url: string, session: AuthSession) {
             if (request.readyState == 4) {  //DONE
                 if(request.status == 200) { //OK
 
-                    dispatch(<SearchInCommunitySuccessAction>{
-                        type: SEARCH_COMMUNITY_SUCCESS,
-                        result: request.responseText
-                    })
+                    dispatch(new SearchInCommunitySuccessAction(request.responseText).plain())
                 }else{
 
-                    dispatch(<SearchInCommunityFailAction>{
-                        type: SEARCH_COMMUNITY_FAIL
-                    })
+                    dispatch(new SearchInCommunityFailAction().plain())
                 }
             }
         };
         request.send(null);
     }
-}
-
-export function isSearchingInCommunityAction(action: Action): action is SearchingInCommunityAction {
-  return action.type == SEARCHING_COMMUNITY;
-}
-export function isSearchInCommunitySuccessAction(action: Action): action is SearchInCommunitySuccessAction {
-    return action.type == SEARCH_COMMUNITY_SUCCESS;
-}
-export function isSearchInCommunityFailAction(action: Action): action is SearchInCommunityFailAction {
-    return action.type == SEARCH_COMMUNITY_FAIL;
 }

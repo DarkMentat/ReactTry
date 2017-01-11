@@ -1,5 +1,5 @@
 import {Action} from "../actions/action";
-import {isLoginFailAction, isLoginSuccessAction, isLogoutAction} from "../actions/authActions";
+import {LoginSuccessAction, LoginFailAction, LogoutAction} from "../actions/authActions";
 import {AuthState} from "../state/state";
 
 
@@ -9,17 +9,17 @@ const initState: AuthState = {
 
 export default function authReducer(state: AuthState = initState, action: Action): AuthState {
 
-    if(isLoginSuccessAction(action)) {
+    if(LoginSuccessAction.typeOf(action)) {
 
         return {...state, isLoggedIn: true, user: action.user, session: action.session }
     }
 
-    if(isLoginFailAction(action)) {
+    if(LoginFailAction.typeOf(action)) {
 
         return {...state, isLoggedIn: false, user: null, session: null }
     }
 
-    if(isLogoutAction(action)) {
+    if(LogoutAction.typeOf(action)) {
 
         return {...state, isLoggedIn: false, user: null, session: null }
     }
