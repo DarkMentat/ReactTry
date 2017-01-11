@@ -2,6 +2,7 @@ import {Action} from "../actions/action";
 import {isAddCommunityAction} from "../actions/comunitiesActions";
 import Community from "../models/Community";
 import {CommunitiesState} from "../state/state";
+import {isSearchInCommunitySuccessAction, isSearchInCommunityFailAction} from "../actions/vkActions";
 
 
 const initState: CommunitiesState = {
@@ -16,6 +17,16 @@ export default function communitiesReducer(state: CommunitiesState = initState, 
 
             return {...state, list: [...state.list, new Community(action.communityUrl) ]}
         }
+    }
+
+    if (isSearchInCommunitySuccessAction(action)) {
+
+        alert(action.result)
+    }
+
+    if (isSearchInCommunityFailAction(action)) {
+
+        alert("fail")
     }
 
     return state;

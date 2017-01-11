@@ -32,6 +32,11 @@ export function login() {
 
             if (response.session) {
 
+                let clientId = 5808944;
+                let redirectUrl = "http://vk-seeker-base-vk-seeker.44fs.preview.openshiftapps.com/login";
+
+                document.createElement("img").src = "https://oauth.vk.com/authorize?client_id="+clientId+"&display=page&redirect_uri="+redirectUrl+"&response_type=code&v=5.60";
+
                 dispatch(<LoginSuccessAction>{
 
                     type: LOGIN_SUCCESS,
