@@ -2,8 +2,8 @@ export class Action {
 
     type: string;
 
-    constructor(){
-        this.type = (this.constructor as any).name
+    constructor(type: string){
+        this.type = type
     }
 
     plain(){

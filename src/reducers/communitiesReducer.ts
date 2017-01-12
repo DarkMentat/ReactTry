@@ -12,9 +12,15 @@ const initState: CommunitiesState = {
 
 export default function communitiesReducer(state: CommunitiesState = initState, action: Action): CommunitiesState {
 
+    console.log("addComunityRed");
+
     if (AddCommunityAction.typeOf(action)) {
+
+        console.log("addComunityRed1");
+
         if(!state.list.some(x => x.url == action.communityUrl)) {
 
+            console.log("addComunityRed2");
             return {...state, list: [...state.list, new Community(action.communityUrl) ]}
         }
     }

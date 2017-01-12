@@ -10,7 +10,7 @@ export class AddCommunityAction extends Action {
     communityUrl: string;
 
     constructor(communityUrl: string) {
-        super();
+        super("AddCommunityAction");
         this.communityUrl = communityUrl;
     }
 }

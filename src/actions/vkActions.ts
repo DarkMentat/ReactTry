@@ -7,12 +7,20 @@ export class SearchInCommunityStartAction extends Action {
     static typeOf(action: Action): action is SearchInCommunityStartAction{
         return action.type == "SearchInCommunityStartAction"
     }
+
+    constructor() {
+        super("SearchInCommunityStartAction");
+    }
 }
 
 export class SearchInCommunityFailAction extends Action {
 
     static typeOf(action: Action): action is SearchInCommunityFailAction{
         return action.type == "SearchInCommunityFailAction"
+    }
+
+    constructor() {
+        super("SearchInCommunityFailAction");
     }
 }
 
@@ -25,7 +33,7 @@ export class SearchInCommunitySuccessAction extends Action {
     result: string;
 
     constructor(result: string) {
-        super();
+        super("SearchInCommunitySuccessAction");
 
         this.result = result;
     }

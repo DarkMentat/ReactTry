@@ -9,6 +9,10 @@ export class LogoutAction extends Action {
     static typeOf(action: Action): action is LogoutAction{
         return action.type == "LogoutAction"
     }
+
+    constructor() {
+        super("LogoutAction");
+    }
 }
 
 
@@ -17,12 +21,20 @@ export class LoginStartAction extends Action {
     static typeOf(action: Action): action is LoginStartAction{
         return action.type == "LoginStartAction"
     }
+
+    constructor() {
+        super("LoginStartAction");
+    }
 }
 
 export class LoginFailAction extends Action {
 
     static typeOf(action: Action): action is LoginFailAction{
         return action.type == "LoginFailAction"
+    }
+
+    constructor() {
+        super("LoginFailAction");
     }
 }
 
@@ -37,7 +49,7 @@ export class LoginSuccessAction extends Action {
 
 
     constructor(user: AuthUser, session: AuthSession) {
-        super();
+        super("LoginSuccessAction");
 
         this.user = user;
         this.session = session;
